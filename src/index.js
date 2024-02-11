@@ -100,32 +100,7 @@ const afterLoadingAnimations = (bubbles, tl) => {
         opacity: 0
     }, {opacity:1});
 
-    const products = document.querySelectorAll('.product');
-    products.forEach(product => {
-        gsap.set(product, {
-            y: -60,
-            scale: 0.5,
-            opacity: 0
-        })
-    })
-    tl.to(products, {
-            duration: 0.5,
-            scale: 1,
-            opacity: 1,
-            y: 0,
-            ease: "power1.inOut",
-            stagger: {
-                amount: 1.5,
-                axis: "x",
-                ease: "power1.in",
-                from: 'start'
-            },
-        scrollTrigger:{
-            trigger:".product-list",
-            start:"top center"
-        },
-        },
-    );
+
 }
 
 let prevPosition = window.scrollY;
@@ -361,5 +336,29 @@ const categoriesList = document.querySelector("#categories-list");
     if(scrollPosition > 50){
         afterLoadingAnimations(bubbles, tl);
     }
-
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+        gsap.set(product, {
+            y: -60,
+            scale: 0.5,
+            opacity: 0
+        })
+    })
+    tl.to(products, {
+            duration: 0.5,
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            ease: "power1.inOut",
+            stagger: {
+                axis: "x",
+                ease: "power1.in",
+                from: 'start'
+            },
+            scrollTrigger:{
+                trigger:".product-list",
+                start:"top center"
+            },
+        },
+    );
 });
