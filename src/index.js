@@ -252,7 +252,7 @@ const categoriesList = document.querySelector("#categories-list");
     let tl = gsap.timeline();
     function checkScrollPosition() {
         const scrollPosition = localStorage.getItem("y") || position.y || 0;
-        if (30 <= scrollPosition) {
+        if (50 <= scrollPosition) {
             gsap.set("#main",{
                 top: "-150%"
             })
@@ -280,9 +280,10 @@ const categoriesList = document.querySelector("#categories-list");
             gsap.set(["#trigger1", "#footer"], {
                 opacity: 1,
             })
+            gsapTl.kill();
+
             afterLoadingAnimations(bubbles, tl);
 
-            gsap.killAll();
 
         }else{
             gsap.set(["#trigger1", "#footer"],{
@@ -353,11 +354,12 @@ const categoriesList = document.querySelector("#categories-list");
             duration: 1,
             top: 0,
             position: "relative",
-        }, "next-middle").to(window, { scrollTo: 0}, "next-middle");
-
-
-
+        }, "next-middle").to(window, { scrollTo: 0 }, "next-middle");
+        afterLoadingAnimations(bubbles, tl);
     })
-    afterLoadingAnimations(bubbles, tl);
+    const scrollPosition = localStorage.getItem("y") || position.y || 0;
+    if(scrollPosition > 50){
+        afterLoadingAnimations(bubbles, tl);
+    }
 
 });
