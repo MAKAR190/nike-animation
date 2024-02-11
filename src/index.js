@@ -255,8 +255,8 @@ const categoriesList = document.querySelector("#categories-list");
         }
     });
     function checkScrollPosition() {
-        const scrollPosition = window.localStorage.getItem("y") || position.y || 0;
-        if (50 <= scrollPosition) {
+        const scrollPosition = position.y || 0;
+        if (1 <= scrollPosition) {
             gsap.set("#main",{
                 top: "-150%"
             })
