@@ -124,7 +124,7 @@ const afterLoadingAnimations = (bubbles, tl) => {
             trigger:".product-list",
             start:"top center"
         },
-        }
+        },
     );
 }
 
@@ -249,14 +249,10 @@ const categoriesList = document.querySelector("#categories-list");
         }
     });
     // Second GSAP timeline (tl)
-    let tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: "#trigger1",
-        }
-    });
+    let tl = gsap.timeline();
     function checkScrollPosition() {
-        const scrollPosition = position.y || 0;
-        if (1 <= scrollPosition) {
+        const scrollPosition = localStorage.getItem("y") || position.y || 0;
+        if (30 <= scrollPosition) {
             gsap.set("#main",{
                 top: "-150%"
             })
@@ -285,12 +281,14 @@ const categoriesList = document.querySelector("#categories-list");
                 opacity: 1,
             })
             afterLoadingAnimations(bubbles, tl);
+
             gsap.killAll();
 
         }else{
             gsap.set(["#trigger1", "#footer"],{
                 display: "none",
             })
+
         }
     }
     checkScrollPosition();
@@ -330,7 +328,7 @@ const categoriesList = document.querySelector("#categories-list");
         display:"block",
     });
 
-    tl.to("#main", {
+    gsapTl.to("#main", {
         top: "-100%",
     }).to("#logoB", {
         opacity: 1,
@@ -338,24 +336,28 @@ const categoriesList = document.querySelector("#categories-list");
         opacity: 0,
         duration: 0.4,
     })
-    tl.add("middle").to("#scene", {
-        left: 0,
-        ease: "power1.out",
-    }, "middle").to("#logoB", {
-        left: "-100%",
-        ease: "power4.out",
-    },"middle").to(".img",{
-        opacity: 1,
-        delay: 1,
-        ease: "power3.out",
-    }, "middle");
+
+    gsapTl.eventCallback("onComplete", function() {
+        tl.add("middle").to("#scene", {
+            left: 0,
+            ease: "power1.out",
+        }, "middle").to("#logoB", {
+            left: "-100%",
+            ease: "power4.out",
+        },"middle").to(".img",{
+            opacity: 1,
+            delay: 1,
+            ease: "power3.out",
+        }, "middle");
         tl.add("next-middle").to("#scene", {
-        duration: 1,
-        top: 0,
-        position: "relative",
-    }, "next-middle").to(window, { scrollTo: 0}, "next-middle");
+            duration: 1,
+            top: 0,
+            position: "relative",
+        }, "next-middle").to(window, { scrollTo: 0}, "next-middle");
 
 
 
-    afterLoadingAnimations(bubbles, tl);
+        afterLoadingAnimations(bubbles, tl);
+    })
+
 });
