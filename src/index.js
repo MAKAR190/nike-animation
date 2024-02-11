@@ -226,7 +226,7 @@ const categoriesList = document.querySelector("#categories-list");
     // Second GSAP timeline (tl)
     let tl = gsap.timeline();
     function checkScrollPosition() {
-        const scrollPosition = localStorage.getItem("y") - 10 || position.y || 0;
+        const scrollPosition = Number(localStorage.getItem("y")) - 10 || position.y || 0;
         if (50 <= scrollPosition) {
             gsap.set("#main",{
                 top: "-150%"
