@@ -357,7 +357,7 @@ const categoriesList = document.querySelector("#categories-list");
 
 
 
-        afterLoadingAnimations(bubbles, tl);
     })
+    afterLoadingAnimations(bubbles, tl);
 
 });
